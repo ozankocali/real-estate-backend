@@ -39,6 +39,7 @@ public class PropertyService {
         existingProperty.setNumberOfBathrooms(property.getNumberOfBathrooms());
         existingProperty.setNumberOfGarageSpaces(property.getNumberOfGarageSpaces());
         existingProperty.setLandSize(property.getLandSize());
+        existingProperty.setDescription(property.getDescription());
         Property updatedProperty = propertyRepository.save(existingProperty);
         return ResponseEntity.ok(updatedProperty);
     }
