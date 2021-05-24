@@ -33,7 +33,7 @@ public class PropertyService {
     public ResponseEntity<Property> updateAd(Long id, Property property){
         Property existingProperty = propertyRepository.findById(id).orElseThrow(()->new NotFoundByIdException("Ad not exist with id:"+id));
         existingProperty.setName(property.getName());
-        existingProperty.setAdress(property.getAddress());
+        existingProperty.setAddress(property.getAddress());
         existingProperty.setPrice(property.getPrice());
         existingProperty.setNumberOfBedrooms(property.getNumberOfBedrooms());
         existingProperty.setNumberOfBathrooms(property.getNumberOfBathrooms());
