@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="ads")
-public class Ad {
+public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,10 +23,10 @@ public class Ad {
     @Column(name = "land_size")
     private int landSize;
 
-    public Ad() {
+    public Property() {
     }
 
-    public Ad(String name, double price, String address, short numberOfBedrooms, short numberOfBathrooms, short numberOfGarageSpaces, int landSize) {
+    public Property(String name, double price, String address, short numberOfBedrooms, short numberOfBathrooms, short numberOfGarageSpaces, int landSize) {
         this.name = name;
         this.price = price;
         this.address = address;
