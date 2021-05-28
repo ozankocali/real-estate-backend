@@ -4,6 +4,7 @@ import com.ozeeesoftware.realestate.exception.NotFoundByIdException;
 import com.ozeeesoftware.realestate.model.Property;
 import com.ozeeesoftware.realestate.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,22 +13,22 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class PropertyService {
+public class PropertyServiceImpl {
 
     @Autowired
     private PropertyRepository propertyRepository;
 
-    public List<Property> getAllAds(){
-        return propertyRepository.findAll();
+    public ResponseEntity<List<Property>> getAllAds(){
+        return new ResponseEntity<List<Property>>(propertyRepository.findAll(),HttpStatus.OK);
     }
 
-    public Property createAd(Property property){
-        return propertyRepository.save(property);
+    public ResponseEntity<Property> createAd(Property property){
+        return new ResponseEntity<Property>(propertyRepository.save(property), HttpStatus.OK);
     }
 
     public ResponseEntity<Property> getAdById(Long id){
         Property property = propertyRepository.findById(id).orElseThrow(()->new NotFoundByIdException("Ad not exist with id:"+id));
-        return ResponseEntity.ok(property);
+        return new ResponseEntity<Property>(property,HttpStatus.OK);
     }
 
     public ResponseEntity<Property> updateAd(Long id, Property property){
@@ -41,7 +42,7 @@ public class PropertyService {
         existingProperty.setLandSize(property.getLandSize());
         existingProperty.setDescription(property.getDescription());
         Property updatedProperty = propertyRepository.save(existingProperty);
-        return ResponseEntity.ok(updatedProperty);
+        return new ResponseEntity<Property>(updatedProperty,HttpStatus.OK);
     }
 
     public ResponseEntity<Map<String,Boolean>> deleteAd(Long id){
@@ -49,7 +50,7 @@ public class PropertyService {
         propertyRepository.delete(existingProperty);
         Map<String,Boolean> response=new HashMap<>();
         response.put("deleted",Boolean.TRUE);
-        return ResponseEntity.ok(response);
+        return new ResponseEntity<Map<String,Boolean>>(response,HttpStatus.OK);
     }
 
 }
