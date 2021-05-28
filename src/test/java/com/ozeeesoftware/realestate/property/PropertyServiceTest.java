@@ -39,7 +39,7 @@ public class PropertyServiceTest {
 
         when(propertyRepository.findAll()).thenReturn(propertyList);
 
-        assertEquals(2,propertyService.getAllAds().size());
+        assertEquals(2,propertyService.getAllAds().getBody().size());
 
     }
 

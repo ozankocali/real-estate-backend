@@ -1,4 +1,4 @@
-package com.ozeeesoftware.realestate.property;
+package com.ozeeesoftware.realestate.service;
 
 import com.ozeeesoftware.realestate.model.Property;
 import org.springframework.http.ResponseEntity;

@@ -13,24 +13,28 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class PropertyServiceImpl {
+public class PropertyServiceImpl implements PropertyService{
 
     @Autowired
     private PropertyRepository propertyRepository;
 
+    @Override
     public ResponseEntity<List<Property>> getAllAds(){
         return new ResponseEntity<List<Property>>(propertyRepository.findAll(),HttpStatus.OK);
     }
 
+    @Override
     public ResponseEntity<Property> createAd(Property property){
         return new ResponseEntity<Property>(propertyRepository.save(property), HttpStatus.OK);
     }
 
+    @Override
     public ResponseEntity<Property> getAdById(Long id){
         Property property = propertyRepository.findById(id).orElseThrow(()->new NotFoundByIdException("Ad not exist with id:"+id));
         return new ResponseEntity<Property>(property,HttpStatus.OK);
     }
 
+    @Override
     public ResponseEntity<Property> updateAd(Long id, Property property){
         Property existingProperty = propertyRepository.findById(id).orElseThrow(()->new NotFoundByIdException("Ad not exist with id:"+id));
         existingProperty.setName(property.getName());
@@ -45,6 +49,7 @@ public class PropertyServiceImpl {
         return new ResponseEntity<Property>(updatedProperty,HttpStatus.OK);
     }
 
+    @Override
     public ResponseEntity<Map<String,Boolean>> deleteAd(Long id){
         Property existingProperty = propertyRepository.findById(id).orElseThrow(()->new NotFoundByIdException("Ad not exist with id:"+id));
         propertyRepository.delete(existingProperty);
